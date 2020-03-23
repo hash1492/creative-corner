@@ -18,14 +18,14 @@ export default {
     return {
         categories: [
             {
-                name: 'Earrings',
-                img: require('./../assets/earrings.png'),
-                link: '/category/earrings'
-            },
-            {
                 name: 'Necklaces',
                 img: require('./../assets/necklace.png'),
                 link: '/category/necklaces'
+            },
+            {
+                name: 'Earrings',
+                img: require('./../assets/earrings.png'),
+                link: '/category/earrings'
             },
             {
                 name: 'Bangles',
@@ -37,39 +37,42 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss">
+@import 'node_modules/include-media/dist/include-media';
+
 .categories-row-component {
-    margin: 30px 0;
-}
+    margin: 40px 0;
 
-.categories-list {
+    .categories-list {
     display: flex;
-}
+  }
 
-.category {
-    background-color: #ea0000;
-    flex: 1 1 auto;
-    border-right: 1px solid #eee;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    padding-top: 20px;
-}
+  .category {
+      background-color: #eb2188;
+      flex: 1 1 auto;
+      border-right: 1px solid #eee;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      padding-top: 20px;
+      transition: background-color 300ms linear;
 
-.category:hover {
-    text-decoration: none;
-    color: white;
-}
+      &:hover {
+      text-decoration: none;
+      color: white;
+      background-color: #080A52;
+    }
 
-.category:hover {
-    opacity: 0.8;
-}
+    img {
+      margin-bottom: 10px;
+    }
 
-.category img {
-    margin-bottom: 10px;
-}
-
-.category p {
-    text-transform: uppercase;
+    p {
+      // text-transform: uppercase;
+      @include media("<=480px") {
+        font-size: 14px;
+      }
+    }
+  }
 }
 </style>

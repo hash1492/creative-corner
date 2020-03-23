@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link href="https://fonts.googleapis.com/css?family=Handlee|Merienda&display=swap" rel="stylesheet">
     <shell></shell>
   </div>
 </template>
@@ -10,7 +11,7 @@ export default {
   name: 'app',
   components: {
     Shell
-  }
+  },
 }
 </script>
 

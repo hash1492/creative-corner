@@ -1,87 +1,93 @@
 <template>
   <div>
     <div class="featured-products-component">
-      <!-- <h1>FeaturedProducts</h1> -->
-        <carousel 
-          :per-page="1"
-          :autoplay="true"
-          :loop="true"
-          :pagination-size="15"
-          :pagination-active-color="'brown'"
-          :pagination-color="'grey'"
-          :pagination-position="'bottom-overlay'">
-          <slide v-for="product in products" :key="product.title">
-            <img :src="product.img" alt="">
-            <!-- <div class="featured-product-info"> -->
-              <!-- <h3 class="featured-product-title">{{product.title}}</h3> -->
-            <!-- </div>             -->
-          </slide>
-        </carousel>
+      <flickity ref="flickity" :options="flickityOptions" class="carousel">
+        <div class="carousel-cell" v-for="category in categories" :key="category.name">
+          <a :href="category.link">
+            <img :src="category.img" class="category-img">
+            <div class="category-name-container">
+              <h4 class="category-name">{{category.name}}</h4>
+            </div>
+          </a>
+        </div>
+      </flickity>
     </div>
   </div>
 </template>
 <script type="text/javascript">
+import Flickity from "vue-flickity";
+import 'flickity-imagesloaded';
+
 export default {
   name: "FeaturedProducts",
+  components: {
+    Flickity
+  },
   data() {
     return {
-      slide: 0,
-      sliding: null,
-      products: [
+      flickityOptions: {
+        prevNextButtons: true,
+        pageDots: true,
+        wrapAround: true,
+        autoPlay: true,
+        autoPlay: 2800,
+        imagesLoaded: true
+      },
+      categories: [
         {
-          img: require("./../assets/product_images/p1.jpg"),
-          title: "p1",
-          description: ""
+          name: "Necklaces",
+          img: require("./../assets/necklaces.jpg"),
+          link: "/category/necklaces"
         },
         {
-          img: require("./../assets/product_images/p2.jpg"),
-          title: "p2",
-          description: ""
+          name: "Earrings",
+          img: require("./../assets/earrings.jpg"),
+          link: "/category/earrings"
         },
         {
-          img: require("./../assets/product_images/p3.jpg"),
-          title: "p3",
-          description: ""
+          name: "Bangles",
+          img: require("./../assets/bangles.jpg"),
+          link: "/category/bangles"
         }
       ]
     };
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
-<style>
+<style lang="scss" scoped>
 .featured-products-component {
-}
-.featured-products-component img {
-  height: 400px;
-  /* width: 800px; */
-}
+  .carousel {
+    .carousel-cell {
+      width: 85%;
+      margin-right: 10px;
+      color: white;
 
-.featured-products-component .carousel-item {
-  transition: transform 0.5s;
-}
+      .category-img {
+        width: 100%;
+      }
 
-.carousel-item {
-  background-color: blueviolet;
-}
+      .category-name {
+        color: white;
+        font-family: Merienda,cursive;
 
-.featured-product-info {
-    position: absolute;
-    background-color: blueviolet;
-    top: 0;
-    width: 30%;
-    height: 400px;
-    right: 0;
-    opacity: 0.8;
-}
+        &-container {
+          position: relative;
+          bottom: 2px;
+          padding: 5px;
+          background-color: #080a52;
+          opacity: 0.7;
 
-.featured-product-title {
-  background-color: blueviolet;
-  opacity: 0.8;
-  position: relative;
-  bottom: 30px;
-  padding: 10px;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 </style>
