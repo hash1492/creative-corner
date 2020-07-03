@@ -10,6 +10,7 @@
       </div>
       <div class="form-group">
         <button type="button" class="btn btn-info" @click="productMessages">Product Messages</button>
+        <!-- <button type="button" class="btn btn-info" @click="updateallproducts">Update all products</button> -->
       </div>
       <table class="table table-striped">
         <thead>
@@ -59,6 +60,7 @@
 import axios from 'axios';
 import * as firebase from '../firebase/config'
 var productsCollection = firebase.productsCollection
+const firebaseDb = firebase.firebaseDb
 
 export default {
   data() {
@@ -107,15 +109,15 @@ export default {
     // })
   },
   methods: {
-    loadMoreProducts() {
-      this.page = this.page + 1;
-      axios
-      .get(`http://localhost:3000/products?page=${this.page}&pageSize=${this.pageSize}`)
-      .then(response => {
-        console.log(response);
-        this.products = this.products.concat(response.data.products);
-      })
-    },
+    // loadMoreProducts() {
+    //   this.page = this.page + 1;
+    //   axios
+    //   .get(`http://localhost:3000/products?page=${this.page}&pageSize=${this.pageSize}`)
+    //   .then(response => {
+    //     console.log(response);
+    //     this.products = this.products.concat(response.data.products);
+    //   })
+    // },
     viewProduct(product) {
       console.log(product);
       this.$router.push({name: 'ProductDetail', params: {product_id: product.id}})
@@ -145,7 +147,16 @@ export default {
     },
     productMessages() {
       this.$router.push({name: 'ProductMessagesList'});
-    }
+    },
+    // updateAllProducts() {
+    //   productsCollection.get().then(function(querySnapshot) {
+    //       querySnapshot.forEach(function(doc) {
+    //           doc.ref.update({
+    //               createdAt: new Date()
+    //           });
+    //       });
+    //   });
+    // }
   }
 }
 </script>

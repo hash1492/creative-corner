@@ -5,10 +5,11 @@
     <div v-if="loaded">
       <div v-if="orderedProducts.length > 0">
         <div class="sort-component">
-          Sort By:
+          Sort By
           <select v-model="sortBy">
             <option value="price_desc">Price: High - Low</option>
             <option value="price_asc">Price: Low - High </option>
+            <option value="newest">Newest Arrivals</option>
           </select>
         </div>
         <div class="category-products">
@@ -37,14 +38,26 @@ export default {
       if(!this.products || this.products.length === 0) {
         return [];
       }
-      function compare(a, b) {
+      function sortByPrice(a, b) {
         if (a.price < b.price) return -1;
         if (a.price > b.price) return 1;
         return 0;
       }
-      const products = this.products.sort(compare);
-      const orderedProducts = this.sortBy === "price_asc" ? products : products.reverse();
 
+      function sortByNewest(a, b) {
+        if (a.createdAt > b.createdAt) return -1;
+        if (a.createdAt < b.createdAt) return 1;
+        return 0;
+      }
+
+      let orderedProducts = this.products.slice();
+      if(this.sortBy === "price_asc" || this.sortBy === "price_desc") {
+         orderedProducts.sort(sortByPrice);
+         orderedProducts = this.sortBy === "price_asc" ? orderedProducts : orderedProducts.reverse();
+      } else {
+        orderedProducts.sort(sortByNewest);
+      }
+    
       return orderedProducts;
     }
   },
@@ -52,13 +65,11 @@ export default {
     return {
       products: [],
       categoryName: '',
-      sortBy: 'price_desc',
+      sortBy: 'newest',
       loaded: false
     };
   },
   created() {
-    console.log(this.$route.params.category_id);
-    
     switch (this.$route.params.category_id) {
       case "necklaces":
         this.categoryName = "Necklaces";
@@ -78,17 +89,16 @@ export default {
       case "quilled-envelopes":
         this.categoryName = "Quilled Envelopes";
         break;
+      case "trendy-jewellery":
+        this.categoryName = "Trendy Jewellery";
+        break;
     }
 
     var self = this;
     productsCollection.where('category','==', this.categoryName)
     .get()
     .then(function (querySnapshot) {
-      console.log(querySnapshot);
-      
       querySnapshot.forEach(function (doc) {
-        console.log(doc);
-        
         self.products.push(doc.data())
       })
       self.loaded = true;
@@ -126,9 +136,12 @@ export default {
   .sort-component {
     padding: 20px 0;
     text-align: right;
+    font-weight: bold;
 
     select {
       border: 1px solid #aaa;
+      border-radius: 5px;
+      padding: 5px;
     }
   }
 }

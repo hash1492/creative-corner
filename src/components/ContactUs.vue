@@ -1,7 +1,7 @@
 <template>
   <div class="contact-us-component container">
     <div class="address">
-      <img class="app-logo"  src="./../assets/logo.png" alt="Mansi's Creative Corner">
+      <img class="app-logo"  src="./../assets/default.png" alt="Mansi's Creative Corner">
       <p>Mansi Joshi</p>
       <p>M: +91 9662513350</p>
       <p>Email: mansiscreativecorner@gmail.com</p>
@@ -26,6 +26,7 @@
 .contact-us-component {
     margin-top: 80px;
     .app-logo {
+      width: 300px;
       margin-bottom: 20px;
     }
 

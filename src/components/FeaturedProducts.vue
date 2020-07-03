@@ -6,7 +6,7 @@
           <a :href="category.link">
             <img :src="category.img" class="category-img">
             <div class="category-name-container">
-              <h4 class="category-name">{{category.name}}</h4>
+              <div class="category-name">{{category.name}}</div>
             </div>
           </a>
         </div>
@@ -70,6 +70,7 @@ export default {
       .category-name {
         color: white;
         font-family: Merienda,cursive;
+        font-size: 18px;
 
         &-container {
           position: relative;

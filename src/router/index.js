@@ -98,7 +98,7 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: '/category/:category_id(necklaces|earrings|bangles|candle-holders|latkans|quilled-envelopes)',
+      path: '/category/:category_id(necklaces|earrings|bangles|candle-holders|latkans|quilled-envelopes|trendy-jewellery)',
       name: 'CategoryProducts',
       component: CategoryProducts
     },

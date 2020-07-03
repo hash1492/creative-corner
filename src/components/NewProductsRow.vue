@@ -1,8 +1,7 @@
 <template>
   <div class="new-products-row">
-    <a class="product-category" :href="categoryLink">
-      <span>{{category}}</span>
-      <span class="see-more">See More ></span>
+    <a class="product-category">
+      <span>Newly Added</span>
     </a>
     <hr />
     <div class="products-row">
@@ -38,17 +37,10 @@ export default {
       products: []
     };
   },
-  computed: {
-    categoryLink() {
-      return `/category/${this.category}`
-    }
-  },
   created() {
     var self = this;
-    console.log(this.category);
     
     productsCollection
-      .where("category", "==", this.category)
       .orderBy("createdAt", "desc")
       .limit(3)
       .get()
@@ -65,4 +57,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "node_modules/include-media/dist/include-media";
+.new-products-row {
+  margin: 30px 0;
+
+  .product-category {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #eb2188;
+    font-family: "Merienda", cursive;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &:hover {
+      text-decoration: none;
+      color: #eb2188;
+    }
+  }
+
+  .products-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 30px;
+    column-gap: 30px;
+
+    @include media("<=tablet") {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include media("<=480px") {
+      grid-template-columns: 1fr;
+    }
+
+    .no-products {
+      text-align: center;
+    }
+  }
+}
 </style>

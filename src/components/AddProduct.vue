@@ -20,6 +20,7 @@
             <div class="form-group">
               <select v-model="product.category" class="form-control">
                 <option value="" selected>Select Category</option>
+                <option value="Trendy Jewellery">Trendy Jewellery</option>
                 <option value="Necklaces">Necklaces</option>
                 <option value="Earrings">Earrings</option>
                 <option value="Bangles">Bangles</option>
@@ -134,6 +135,7 @@ export default {
       }
       this.product.id = uuidv4();
       this.product.price = parseInt(this.product.price);
+      this.product.createdAt = new Date();
       productsCollection.add(Object.assign({}, this.product))
       .then(function (docRef) {
         console.log('Document written with ID: ', docRef.id)

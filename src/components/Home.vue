@@ -13,18 +13,19 @@
         <span class="search-result" v-if="searchedProducts.length === 0">No product found</span>
       </div>
     </div>
-    <featured-products></featured-products>
+
     <div class="container">
-      <!-- <categories-row></categories-row> -->
+      <featured-products></featured-products>
+      <new-products-row></new-products-row>
       <products-row v-for="config in productRowConfigs" :key="config.category.name" :config="config"></products-row>
     </div>
     
   </div>
 </template>
 <script type="text/javascript">
-import CategoriesRow from "./CategoriesRow";
 import ProductsRow from "./ProductsRow";
 import FeaturedProducts from "./FeaturedProducts";
+import NewProductsRow from "./NewProductsRow";
 
 import * as firebase from "../firebase/config";
 const productsCollection = firebase.productsCollection;
@@ -32,14 +33,21 @@ const productsCollection = firebase.productsCollection;
 export default {
   name: "Home",
   components: {
-    CategoriesRow,
     ProductsRow,
-    FeaturedProducts
+    FeaturedProducts,
+    NewProductsRow
   },
   data() {
     return {
       searchText: "",
       productRowConfigs: [
+        {
+          category: {
+            name: "Trendy Jewellery",
+            link: "/category/trendy-jewellery"
+          },
+          products: []
+        },
         {
           category: {
             name: "Necklaces",
@@ -68,20 +76,20 @@ export default {
           },
           products: []
         },
-        {
-          category: {
-            name: "Latkans",
-            link: "/category/latkans"
-          },
-          products: []
-        },
-        {
-          category: {
-            name: "Quilled Envelopes",
-            link: "/category/quilled-envelopes"
-          },
-          products: []
-        }
+        // {
+        //   category: {
+        //     name: "Latkans",
+        //     link: "/category/latkans"
+        //   },
+        //   products: []
+        // },
+        // {
+        //   category: {
+        //     name: "Quilled Envelopes",
+        //     link: "/category/quilled-envelopes"
+        //   },
+        //   products: []
+        // },
       ],
       allProducts: []
     };

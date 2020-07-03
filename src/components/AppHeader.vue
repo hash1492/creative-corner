@@ -4,12 +4,13 @@
             <ul class="header-links navigation-links">
                 <li class="header-link">
                     <a class="app-header-logo" href="/">
-                        <img src="./../assets/logo.png" alt="Mansi's Creative Corner" aria-label="Mansi's Creative Corner">
+                        <img src="./../assets/default.png" alt="Mansi's Creative Corner" aria-label="Mansi's Creative Corner">
                     </a>
                 </li>
                 <li class="header-link">
                     <a href="javascript:void(0);" @click="toggleCategoriesMenu">Products</a>
                     <div class="categories-menu" v-if="showMenu">
+                      <a href="/category/trendy-jewellery">Trendy Jewellery</a>
                       <a href="/category/necklaces">Necklaces</a>
                       <a href="/category/bangles">Bangles</a>
                       <a href="/category/earrings">Earrings</a>
@@ -131,7 +132,7 @@ $header-height: 80px;
 }
 
 .app-header-logo img {
-  width: 120px;
+  width: 180px;
   justify-self: center;
 }
 
