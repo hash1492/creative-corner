@@ -16,6 +16,18 @@ import GenericError from '../components/GenericError.vue'
 import * as firebase from '../firebase/config'
 var firebaseAuth = firebase.firebaseAuth
 
+const productCategories = [
+  'necklaces',
+  'earrings',
+  'bangles',
+  'candle-holders',
+  'latkans',
+  'quilled-envelopes',
+  'trendy-jewellery',
+  'buttons',
+  'wooden-necklace-set',
+  'trendy-earrings'
+]
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -98,7 +110,7 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: '/category/:category_id(necklaces|earrings|bangles|candle-holders|latkans|quilled-envelopes|trendy-jewellery)',
+      path: `/category/:category_id(${productCategories.join('|')})`,
       name: 'CategoryProducts',
       component: CategoryProducts
     },
