@@ -1,6 +1,6 @@
 <template>
   <div class="app-footer">
-    &copy; {{ new Date().getFullYear() }} Mansi's Creative Corner. All rights reserved.
+    &copy; {{ new Date().getFullYear() }} Mansi Creative Corner. All rights reserved.
   </div>
 </template>
 <style lang="scss" scoped>

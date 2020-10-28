@@ -18,6 +18,7 @@
             </div>
 
             <div class="form-group">
+              <label>Category</label>
               <select v-model="product.category" class="form-control">
                 <option value="" selected>Select Category</option>
                 <option value="Trendy Jewellery">Trendy Jewellery</option>
@@ -27,16 +28,11 @@
                 <option value="Candle Holders">Candle Holders</option>
                 <option value="Latkans">Latkans</option>
                 <option value="Quilled Envelopes">Quilled Envelopes</option>
+                <option value="Buttons">Buttons</option>
+                <option value="Wooden Necklace Set">Wooden Necklace Set</option>
+                <option value="Trendy Earrings">Trendy Earrings</option>
               </select>
             </div>
-            <!-- <div class="form-group">
-              <select v-model="product.tags" class="form-control" multiple>
-                <option value="" selected>Select Tags</option>
-                <option value="Silk Thread">Silk Thread</option>
-                <option value="Bridal Collection">Bridal Collection</option>
-                <option value="Beads Jewellery">Beads Jewellery</option>
-              </select>
-            </div> -->
           </div>
 
           <div class="image-container">
@@ -71,7 +67,6 @@ export default {
     return {
       product: {
         category: '',
-        // tags: []
       },
       showProductImg: false,
       editMode: false
@@ -157,7 +152,6 @@ export default {
       .update(this.product)
       .then(function() {
           console.log("Document successfully updated!");
-          alert('Product udpated');
           self.$router.push({name: 'ProductsList'})
       })
       .catch(function(error) {

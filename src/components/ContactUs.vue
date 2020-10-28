@@ -1,20 +1,35 @@
 <template>
   <div class="contact-us-component container">
     <div class="address">
-      <img class="app-logo"  src="./../assets/default.png" alt="Mansi's Creative Corner">
-      <p>Mansi Joshi</p>
-      <p>M: +91 9662513350</p>
-      <p>Email: mansiscreativecorner@gmail.com</p>
-      <p>Vadodara, Gujarat, India</p>
+      <img class="app-logo"  src="./../assets/default.png" alt="Mansi Creative Corner">
+      
+      <div class="contact-details">
+        <p class="owner-name">Mansi Joshi</p>
+        <p>+91 9662513350</p>
+        <p>mansicreativecorner@gmail.com</p>
+        <p>Vadodara, Gujarat, India</p>
 
-      <div class="social">
-        <a href="https://www.facebook.com/shop_with_mansi-538925183220808/">
-          <img src="./../assets/facebook.png" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/shop_with_mansi/">
-          <img src="./../assets/instagram.png" alt="Instagram">
-        </a>
-        
+        <div class="links">
+          <!-- <div class="social">
+            <p>Order Now</p>
+            <a href="https://www.etsy.com/in-en/shop/MansiCreativeCorner" target="_blank">
+              <img src="./../assets/etsy-logo.png" alt="Etsy">
+            </a>
+            <a href="https://www.flipkart.com/jewellery/pr?sid=mcr&q=Mansi+Creative+Corner&otracker=categorytree" target="_blank">
+              <img src="./../assets/flipkart-logo.png" alt="Flipkart">
+            </a>
+          </div> -->
+
+          <div class="social">
+            <p>Follow Us</p>
+            <a href="https://www.facebook.com/shop_with_mansi-538925183220808/" target="_blank">
+              <img src="./../assets/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/mansis_creative_corner/" target="_blank">
+              <img src="./../assets/instagram.png" alt="Instagram">
+            </a>
+          </div>
+        </div>
       </div>
     </div>
       <div class="address-map">
@@ -25,6 +40,11 @@
 <style lang="scss">
 .contact-us-component {
     margin-top: 80px;
+
+    .owner-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
     .app-logo {
       width: 300px;
       margin-bottom: 20px;
@@ -36,6 +56,11 @@
 
     .address {
       margin-bottom: 50px;
+    }
+
+    .contact-details {
+      font-family: arial;
+      text-align: left;
     }
 
     .address-map {
@@ -54,14 +79,23 @@
   }
 
   .social {
+    margin-right: 30px;
+    p {
+      font-weight: bold;
+
+    }
     img {
       height: 50px;
-      margin: 0 10px;
+      margin-right: 15px;
       transition: transform .2s;
       &:hover {
         transform: scale(1.2);
       }
     }
+  }
+
+  .links {
+    display: flex;
   }
 }
 </style>

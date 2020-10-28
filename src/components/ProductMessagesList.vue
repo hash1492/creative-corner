@@ -34,7 +34,7 @@
             </td>
           </tr>
           <tr v-if="!productMessages.length">
-            <td colspan="4" class="no-products">No Messages</td>
+            <td colspan="5" class="no-products">No Messages</td>
           </tr>
         </tbody>
       </table>

@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="featured-products-component">
-      <flickity ref="flickity" :options="flickityOptions" class="carousel">
-        <div class="carousel-cell" v-for="category in categories" :key="category.name">
-          <a :href="category.link">
-            <img :src="category.img" class="category-img">
-            <div class="category-name-container">
-              <div class="category-name">{{category.name}}</div>
+      <flickity ref="flickity" :options="flickityOptions" class="carousel" v-if="products.length > 0">
+        <div class="carousel-cell" v-for="(product,index) in products" :key="index">
+          <a :href="product.link">
+            <img :src="product.img" class="product-img">
+            <div class="product-name-container">
+              <div class="product-name">{{product.description}}</div>
             </div>
           </a>
         </div>
@@ -17,6 +17,10 @@
 <script type="text/javascript">
 import Flickity from "vue-flickity";
 import 'flickity-imagesloaded';
+// import 'flickity-fade';
+
+import * as firebase from '../firebase/config';
+const featuredCarouselCollection = firebase.featuredCarouselCollection;
 
 export default {
   name: "FeaturedProducts",
@@ -29,28 +33,36 @@ export default {
         prevNextButtons: true,
         pageDots: true,
         wrapAround: true,
-        autoPlay: true,
         autoPlay: 2800,
-        imagesLoaded: true
+        imagesLoaded: true,
+        // fade: true
       },
-      categories: [
-        {
-          name: "Necklaces",
-          img: require("./../assets/necklaces.jpg"),
-          link: "/category/necklaces"
-        },
-        {
-          name: "Earrings",
-          img: require("./../assets/earrings.jpg"),
-          link: "/category/earrings"
-        },
-        {
-          name: "Bangles",
-          img: require("./../assets/bangles.jpg"),
-          link: "/category/bangles"
-        }
-      ]
+      products: []
     };
+  },
+  created() {
+    var self = this
+    featuredCarouselCollection
+    .get()
+    .then(function (querySnapshot) {
+      const products = [];
+      querySnapshot.forEach(doc => {
+        const product = {
+          ...doc.data(),
+        }
+        products.push(product);
+
+        const orderProducts = (a, b) => {
+          if(a.order > b.order) {
+            return 1
+          } else {
+            return -1
+          }
+        };
+
+        self.products = products.sort(orderProducts);
+      })
+    })
   },
   methods: {}
 };
@@ -59,15 +71,19 @@ export default {
 .featured-products-component {
   .carousel {
     .carousel-cell {
-      width: 85%;
+      width: 100%;
       margin-right: 10px;
       color: white;
 
-      .category-img {
+      .product-img {
         width: 100%;
+
+        &:hover {
+          opacity: 0.95;
+        }
       }
 
-      .category-name {
+      .product-name {
         color: white;
         font-family: Merienda,cursive;
         font-size: 18px;
@@ -76,12 +92,7 @@ export default {
           position: relative;
           bottom: 2px;
           padding: 5px;
-          background-color: #080a52;
-          opacity: 0.7;
-
-          &:hover {
-            opacity: 1;
-          }
+          background-color: rgba(#080a52, 0.8);
         }
       }
 

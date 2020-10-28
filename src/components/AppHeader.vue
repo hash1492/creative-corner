@@ -4,7 +4,7 @@
             <ul class="header-links navigation-links">
                 <li class="header-link">
                     <a class="app-header-logo" href="/">
-                        <img src="./../assets/default.png" alt="Mansi's Creative Corner" aria-label="Mansi's Creative Corner">
+                        <img src="./../assets/default.png" alt="Mansi Creative Corner" aria-label="Mansi Creative Corner">
                     </a>
                 </li>
                 <li class="header-link">
@@ -17,6 +17,9 @@
                       <a href="/category/candle-holders">Candle Holders</a>
                       <a href="/category/latkans">Latkans</a>
                       <a href="/category/quilled-envelopes">Quilled Envelopes</a>
+                      <a href="/category/buttons">Buttons</a>
+                      <a href="/category/wooden-necklace-set">Wooden Necklace Set</a>
+                      <a href="/category/trendy-earrings">Trendy Earrings</a>
                     </div>
                 </li>
                 <li class="header-link">

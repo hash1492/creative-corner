@@ -1,6 +1,6 @@
 <template>
   <div class="category-products-component container">
-    <h4 class="category-name">{{categoryName}}</h4>
+    <h3 class="category-name">{{categoryName}}</h3>
     <hr>
     <div v-if="loaded">
       <div v-if="orderedProducts.length > 0">
@@ -92,16 +92,29 @@ export default {
       case "trendy-jewellery":
         this.categoryName = "Trendy Jewellery";
         break;
+      case "buttons":
+        this.categoryName = "Buttons";
+        break;
+      case "wooden-necklace-set":
+        this.categoryName = "Wooden Necklace Set";
+        break;
+      case "trendy-earrings":
+        this.categoryName = "Trendy Earrings";
+        break;
     }
 
     var self = this;
     productsCollection.where('category','==', this.categoryName)
     .get()
     .then(function (querySnapshot) {
+      console.log(querySnapshot)
       querySnapshot.forEach(function (doc) {
         self.products.push(doc.data())
       })
       self.loaded = true;
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 };

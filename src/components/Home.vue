@@ -1,6 +1,5 @@
 <template>
   <div class="home-component">
-
     <div class="search-component container">
       <div class="form-group">
         <input type="text" class="form-control search-input" v-model="searchText" name="search-input" placeholder="Search product...">
@@ -13,7 +12,6 @@
         <span class="search-result" v-if="searchedProducts.length === 0">No product found</span>
       </div>
     </div>
-
     <div class="container">
       <featured-products></featured-products>
       <new-products-row></new-products-row>
@@ -112,6 +110,7 @@ export default {
     var self = this;
     this.productRowConfigs.forEach((productRow) => {
       productsCollection
+        .orderBy("createdAt", "desc")
         .where("category", "==", productRow.category.name)
         .get()
         .then(function(querySnapshot) {

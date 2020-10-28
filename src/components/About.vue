@@ -1,8 +1,8 @@
 <template>
     <div class="about-component container">
-      <img class="app-logo" src="./../assets/default.png" alt="Mansi's Creative Corner Logo">
+      <img class="app-logo" src="./../assets/default.png" alt="Mansi Creative Corner">
       <div class="description">
-        Mansi's Creative Corner is a place where you can get beautiful handmade jewellery like bangles, earrings, necklaces and more! We can make jewellery in custom colour combinations as per your requirements. We also accept bulk orders. <a href="/contact-us">Contact us</a> to place an order now!
+        Mansi Creative Corner is a place where you can get beautiful handmade jewellery like bangles, earrings, necklaces and more! We can make jewellery in custom colour combinations as per your requirements. We also accept bulk orders. <a href="/contact-us">Contact us</a> to place an order now!
       </div>
     </div>
 </template>

@@ -40,15 +40,15 @@
             </td>
             <td>{{product.name}}</td>
             <!-- <td>{{product.category}}</td> -->
-            <td>{{product.price}}</td>
+            <td><b>₹{{product.price}}</b></td>
             <td>
               <!-- <button type="button" class="btn btn-info action-btn" @click="viewProduct(product)">view</button> -->
-              <button type="button" class="btn btn-warning action-btn" @click="editProduct(product)">edit</button>
-              <button type="button" class="btn btn-danger action-btn" @click="deleteProduct(product)">delete</button>
+              <button type="button" class="btn btn-warning action-btn" @click="editProduct(product)">Edit</button>
+              <button type="button" class="btn btn-danger action-btn" @click="deleteProduct(product)">Delete</button>
             </td>
           </tr>
           <tr v-if="!searchedProducts.length">
-            <td colspan="4" class="no-products">No Products</td>
+            <td colspan="5" class="no-products">No Products</td>
           </tr>
         </tbody>
       </table>
