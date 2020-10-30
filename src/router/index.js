@@ -12,7 +12,9 @@ import AddProduct from '../components/AddProduct.vue'
 import ProductsList from '../components/ProductsList.vue'
 import ProductMessagesList from '../components/ProductMessagesList.vue'
 import GenericError from '../components/GenericError.vue'
-
+import FeaturedProductsList from '../components/FeaturedProductsList.vue'
+import AddFeaturedProduct from '../components/AddFeaturedProduct.vue'
+import AdminHome from '../components/AdminHome.vue'
 import * as firebase from '../firebase/config'
 var firebaseAuth = firebase.firebaseAuth
 
@@ -43,6 +45,67 @@ export default new VueRouter({
     //   name: 'Register',
     //   component: Register
     // },
+
+    {
+      path: '/admin/home',
+      name: 'AdminHome',
+      component: AdminHome,
+      beforeEnter: (to, from, next) => {
+        firebaseAuth.onAuthStateChanged(function(user) {
+          if (!user) {
+            next({name: 'Login'})
+          } else {
+            next()
+          }
+        })
+      }
+    },
+
+    // Featured Products
+    {
+      path: '/admin/featured-products-list',
+      name: 'FeaturedProductsList',
+      component: FeaturedProductsList,
+      beforeEnter: (to, from, next) => {
+        firebaseAuth.onAuthStateChanged(function(user) {
+          if (!user) {
+            next({name: 'Login'})
+          } else {
+            next()
+          }
+        })
+      }
+    },
+    {
+      path: '/admin/edit-featured-product/:product_id',
+      name: 'EditFeaturedProduct',
+      component: AddFeaturedProduct,
+      beforeEnter: (to, from, next) => {
+        firebaseAuth.onAuthStateChanged(function(user) {
+          if (!user) {
+            next({name: 'Login'})
+          } else {
+            next()
+          }
+        })
+      }
+    },
+    {
+      path: '/admin/add-featured-product',
+      name: 'AddFeaturedProduct',
+      component: AddFeaturedProduct,
+      beforeEnter: (to, from, next) => {
+        firebaseAuth.onAuthStateChanged(function(user) {
+          if (!user) {
+            next({name: 'Login'})
+          } else {
+            next()
+          }
+        })
+      }
+    },
+
+    // Products
     {
       path: '/admin/products-list',
       name: 'ProductsList',
@@ -85,6 +148,8 @@ export default new VueRouter({
         })
       }
     },
+
+    // Product Messages
     {
       path: '/admin/product-messages-list',
       name: 'ProductMessagesList',
