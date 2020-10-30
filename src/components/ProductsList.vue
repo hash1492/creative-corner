@@ -9,8 +9,7 @@
         <button type="button" class="btn btn-info" @click="addProduct">Add Product</button>
       </div>
       <div class="form-group">
-        <button type="button" class="btn btn-info" @click="productMessages">Product Messages</button>
-        <!-- <button type="button" class="btn btn-info" @click="updateallproducts">Update all products</button> -->
+        <!-- <button type="button" class="btn btn-info" @click="updateAllProducts">Update all products</button> -->
       </div>
       <table class="table table-striped">
         <thead>
@@ -36,7 +35,7 @@
           <tr v-for="(product, index) in searchedProducts" :key="product.id">
             <td>{{index + 1}}</td>
             <td>
-              <img class="product-img" :src="product.img" @click="viewProduct(product)">
+              <img class="product-img" :src="product.imgs[0]" @click="viewProduct(product)">
             </td>
             <td>{{product.name}}</td>
             <!-- <td>{{product.category}}</td> -->
@@ -57,10 +56,8 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
 import * as firebase from '../firebase/config'
 var productsCollection = firebase.productsCollection
-const firebaseDb = firebase.firebaseDb
 
 export default {
   data() {
@@ -86,7 +83,6 @@ export default {
     }
   },
   created() {
-    // Firebase Implementation
     var self = this
     productsCollection
     .get()
@@ -99,25 +95,8 @@ export default {
         self.products.push(product)
       })
     })
-
-    // // Node Implementation
-    // axios
-    // .get(`http://localhost:3000/products?page=${this.page}&pageSize=${this.pageSize}`)
-    // .then(response => {
-    //   console.log(response);
-    //   this.products = response.data.products;
-    // })
   },
   methods: {
-    // loadMoreProducts() {
-    //   this.page = this.page + 1;
-    //   axios
-    //   .get(`http://localhost:3000/products?page=${this.page}&pageSize=${this.pageSize}`)
-    //   .then(response => {
-    //     console.log(response);
-    //     this.products = this.products.concat(response.data.products);
-    //   })
-    // },
     viewProduct(product) {
       console.log(product);
       this.$router.push({name: 'ProductDetail', params: {product_id: product.id}})
@@ -149,10 +128,10 @@ export default {
       this.$router.push({name: 'ProductMessagesList'});
     },
     // updateAllProducts() {
-    //   productsCollection.get().then(function(querySnapshot) {
+    //   firebase.firestore().collection('products').get().then(function(querySnapshot) {
     //       querySnapshot.forEach(function(doc) {
     //           doc.ref.update({
-    //               createdAt: new Date()
+    //               img: firebase.firestore.FieldValue.delete()
     //           });
     //       });
     //   });

@@ -6,7 +6,7 @@
       </div>
       <div class="search-results" v-if="searchText">
         <div class="search-result" v-for="product in searchedProducts" :key="product.id">
-          <img :src="product.img" alt="">
+          <img :src="product.imgs[0]" alt="">
           <span   @click="viewProduct(product)">{{ product.name }}</span>
         </div>
         <span class="search-result" v-if="searchedProducts.length === 0">No product found</span>

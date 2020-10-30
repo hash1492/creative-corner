@@ -1,7 +1,7 @@
 <template>
   <div class="product-thumbnail-component">
     <div class="product-thumbnail" @click="goToProduct">
-      <img class="product-image" :src="product.img" alt>
+      <img class="product-image" :src="product.imgs[0]" alt>
       <div class="product-details">
         <p class="product-name">{{product.name}}</p>
         <p class="product-price">₹ {{product.price}}</p>

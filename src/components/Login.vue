@@ -42,7 +42,7 @@
         firebaseAuth.signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(function (response) {
           console.log(response)
-          self.$router.push({name: 'ProductsList'})
+          self.$router.push({name: 'AdminHome'})
         })
         .catch(function (err) {
           console.log(err);

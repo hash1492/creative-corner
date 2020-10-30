@@ -1,12 +1,17 @@
 <template>
   <div class="product-detail-component container">
-    <div class="product-details-container">
-      <div class="product-img" @click="toggleImagePreview">
-        <img :src="product.img" />
-      </div>
+    <div class="product-details-container" v-if="product.imgs">
+      <!-- <div class="product-img" @click="toggleImagePreview">
+        <img :src="product.imgs[0]" />
+      </div> -->
+      <flickity ref="flickity" :options="flickityOptions" class="carousel">
+        <div class="carousel-cell" v-for="(img,index) in product.imgs" :key="index">
+          <img :src="img" @click="toggleImagePreview(img)" />
+        </div>
+      </flickity>
       <div class="image-preview" v-if="showImagePreview">
         <span class="close-button" @click="toggleImagePreview">X</span>
-        <img :src="product.img" />
+        <img :src="previewImage" />
       </div>
       <div class="product-info">
         <h3 class="product-title">{{product.name}}</h3>
@@ -74,6 +79,8 @@
   </div>
 </template>
 <script type="text/javascript">
+import Flickity from "vue-flickity";
+import 'flickity-imagesloaded';
 import * as firebase from "../firebase/config";
 import uuidv4 from "uuid/v4";
 import RecentlyViewed from "./RecentlyViewedProducts";
@@ -84,7 +91,8 @@ var productMessagesCollection = firebase.productMessagesCollection;
 export default {
   name: "ProductDetail",
   components: {
-    RecentlyViewed
+    RecentlyViewed,
+    Flickity,
   },
   data() {
     return {
@@ -95,7 +103,15 @@ export default {
         productId: this.$route.params.product_id,
         email: ""
       },
-      showImagePreview: false
+      showImagePreview: false,
+      flickityOptions: {
+        prevNextButtons: true,
+        pageDots: true,
+        wrapAround: true,
+        autoPlay: false,
+        imagesLoaded: true,
+      },
+      previewImage: ''
     };
   },
   computed: {
@@ -134,7 +150,8 @@ export default {
       });
   },
   methods: {
-    toggleImagePreview() {
+    toggleImagePreview(img) {
+      this.previewImage = img;
       this.showImagePreview = !this.showImagePreview;
     },
     sendMessage() {
@@ -171,6 +188,19 @@ export default {
 .product-detail-component {
   margin-top: 80px;
   text-align: left;
+
+  .carousel {
+    width: 700px;
+    @include media("<=480px") {
+      width: 100%;
+    }
+    .carousel-cell {
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
 
   @include media("<=480px") {
     margin-top: 20px;

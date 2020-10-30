@@ -7,7 +7,7 @@
     <div class="products-row">
       <product-thumbnail
         v-for="product in products"
-        :key="product.img"
+        :key="product.id"
         :product="product"
       ></product-thumbnail>
     </div>

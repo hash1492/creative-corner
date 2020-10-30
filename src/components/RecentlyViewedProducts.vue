@@ -3,7 +3,7 @@
     <hr />
     <p class="heading">Recently Viewed</p>
     <div class="products-row">
-      <product-thumbnail v-for="product in products.slice(0, limit)" :key="product.img" :product="product" ></product-thumbnail>
+      <product-thumbnail v-for="product in products.slice(0, limit)" :key="product.imgs[0]" :product="product" ></product-thumbnail>
     </div>
   </div>
 </template>
@@ -32,7 +32,9 @@ export default {
   props: {
     currentProduct: {
       type: Object,
-      default: {}
+      default() {
+        return {}
+      }
     }
   },
   data() {
