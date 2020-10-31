@@ -127,15 +127,27 @@ export default {
     productMessages() {
       this.$router.push({name: 'ProductMessagesList'});
     },
-    // updateAllProducts() {
-    //   firebase.firestore().collection('products').get().then(function(querySnapshot) {
-    //       querySnapshot.forEach(function(doc) {
-    //           doc.ref.update({
-    //               img: firebase.firestore.FieldValue.delete()
-    //           });
-    //       });
-    //   });
-    // }
+    updateAllProducts() {
+      // Delete a field
+      // firebase.firestore().collection('products').get().then(function(querySnapshot) {
+      //     querySnapshot.forEach(function(doc) {
+      //         doc.ref.update({
+      //             img: firebase.firestore.FieldValue.delete()
+      //         });
+      //     });
+      // });
+
+
+      // productsCollection.where('category', '==', 'Wooden Necklace Set')
+      // .get().then(function(querySnapshot) {
+      //   querySnapshot.forEach(function(doc) {
+      //       doc.ref.update({
+      //         category: 'Necklaces',
+      //         subcategory: 'Wooden'
+      //       });
+      //   });
+      // });
+    }
   }
 }
 </script>

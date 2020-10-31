@@ -1,54 +1,68 @@
 <template>
-    <div>
-        <header class="app-header">
-            <ul class="header-links navigation-links">
-                <li class="header-link">
-                    <a class="app-header-logo" href="/">
-                        <img src="./../assets/default.png" alt="Mansi Creative Corner" aria-label="Mansi Creative Corner">
-                    </a>
-                </li>
-                <li class="header-link">
-                    <a href="javascript:void(0);" @click="toggleCategoriesMenu">Products</a>
-                    <div class="categories-menu" v-if="showMenu">
-                      <a href="/category/trendy-jewellery">Trendy Jewellery</a>
-                      <a href="/category/necklaces">Necklaces</a>
-                      <a href="/category/bangles">Bangles</a>
-                      <a href="/category/earrings">Earrings</a>
-                      <a href="/category/candle-holders">Candle Holders</a>
-                      <a href="/category/latkans">Latkans</a>
-                      <a href="/category/quilled-envelopes">Quilled Envelopes</a>
-                      <a href="/category/buttons">Buttons</a>
-                      <a href="/category/wooden-necklace-set">Wooden Necklace Set</a>
-                      <a href="/category/trendy-earrings">Trendy Earrings</a>
-                    </div>
-                </li>
-                <li class="header-link">
-                    <a href="/contact-us">Contact</a>
-                </li>
+  <div>
+    <header class="app-header">
+      <ul class="header-links navigation-links">
+        <li class="header-link">
+          <a class="app-header-logo" href="/">
+            <img
+              src="./../assets/default.png"
+              alt="Mansi Creative Corner"
+              aria-label="Mansi Creative Corner"
+            />
+          </a>
+        </li>
+        <li class="header-link">
+          <a href="javascript:void(0);" @click="toggleCategoriesMenu">Products</a>
+          <div class="categories-menu" v-if="showMenu">
+            <a
+              v-for="category in categories"
+              :key="category.code"
+              :href="`/category/${category.code}`"
+              @mouseover="activeCategory = category.code"
+              @mouseleave="activeCategory = null"
+            >
+              <span>{{ category.name }}</span>
+              <span v-if="category.subcategories" class="subcategories-arrow" @click.prevent="activeCategory = category.code">></span>
+              <div class="subcategories-menu" v-if="activeCategory === category.code">
+                <a
+                  :href="`/category/${category.code}/${subcategory}`"
+                  v-for="subcategory in category.subcategories"
+                  :key="subcategory"
+                >{{subcategory}}</a>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li class="header-link">
+          <a href="/contact-us">Contact</a>
+        </li>
 
-                <li class="header-link">
-                    <a href="/about">About</a>
-                </li>
-            </ul>
-            <ul class="header-links navigation-links-end">
-                <li class="header-link logout-action" v-if="isLoggedIn">
-                    <button type="button" class="btn btn-info" @click="logout">Logout</button>
-                    <img src="./../assets/logout.png" @click="logout" alt="logout">
-                </li>
-            </ul>
-        </header>
-    </div>
+        <li class="header-link">
+          <a href="/about">About</a>
+        </li>
+      </ul>
+      <ul class="header-links navigation-links-end">
+        <li class="header-link logout-action" v-if="isLoggedIn">
+          <button type="button" class="btn btn-info" @click="logout">Logout</button>
+          <img src="./../assets/logout.png" @click="logout" alt="logout" />
+        </li>
+      </ul>
+    </header>
+  </div>
 </template>
 
 <script>
 import * as firebase from "../firebase/config";
 var firebaseAuth = firebase.firebaseAuth;
+const categoriesCollection = firebase.categoriesCollection;
 
 export default {
   data() {
     return {
       isLoggedIn: false,
-      showMenu: false
+      showMenu: false,
+      categories: [],
+      activeCategory: null
     };
   },
   created() {
@@ -60,6 +74,16 @@ export default {
       } else {
         self.isLoggedIn = false;
       }
+    });
+
+    categoriesCollection.get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        const category = {
+          ...doc.data(),
+          firebaseId: doc.id
+        };
+        self.categories.push(category);
+      });
     });
   },
   methods: {
@@ -99,7 +123,6 @@ $header-height: 80px;
   font-family: "Merienda", cursive;
   overflow-x: scroll;
 
-
   .categories-menu {
     position: absolute;
     top: $header-height;
@@ -110,10 +133,27 @@ $header-height: 80px;
     display: flex;
     flex-direction: column;
 
+    @include media("<=480px") {
+      left: 0;
+    }
 
     a {
       padding: 10px 35px;
     }
+
+    .subcategories-arrow {
+      float: right;
+      padding: 0 10px;
+    }
+  }
+
+  .subcategories-menu {
+    position: absolute;
+    left: 200px;
+    transform: translateY(-15%);
+    background-color: #080a52;
+    display: flex;
+    flex-direction: column;
   }
 }
 

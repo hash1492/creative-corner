@@ -21,7 +21,8 @@
               <label>Category</label>
               <select v-model="product.category" class="form-control">
                 <option value="" selected>Select Category</option>
-                <option value="Trendy Jewellery">Trendy Jewellery</option>
+                <option v-for="category in categories" :key="category.code" :value="category.name">{{ category.name }}</option>
+                <!-- <option value="Trendy Jewellery">Trendy Jewellery</option>
                 <option value="Necklaces">Necklaces</option>
                 <option value="Earrings">Earrings</option>
                 <option value="Bangles">Bangles</option>
@@ -30,7 +31,15 @@
                 <option value="Quilled Envelopes">Quilled Envelopes</option>
                 <option value="Buttons">Buttons</option>
                 <option value="Wooden Necklace Set">Wooden Necklace Set</option>
-                <option value="Trendy Earrings">Trendy Earrings</option>
+                <option value="Trendy Earrings">Trendy Earrings</option> -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Subcategory</label>
+              <select v-model="product.subcategory" class="form-control">
+                <option value="" selected>Select Subcategory</option>
+                <option v-for="subcategory in subcategories" :key="subcategory" :value="subcategory">{{ subcategory }}</option>
               </select>
             </div>
           </div>
@@ -63,6 +72,7 @@ import * as firebase from '../firebase/config'
 import uuidv4 from 'uuid/v4'
 
 var productsCollection = firebase.productsCollection
+var categoriesCollection = firebase.categoriesCollection
 var firebaseStorage = firebase.firebaseStorage
 
 export default {
@@ -72,12 +82,41 @@ export default {
         category: '',
         imgs: []
       },
+      categories: [],
       showProductImg: false,
       editMode: false
     }
   },
+  computed: {
+    subcategories() {
+      if(!this.categories.length) {
+        return [];
+      }
+      const activeCategory = this.categories.find(category => {
+        return category.name === this.product.category;
+      })
+      console.log(activeCategory)
+      if(!activeCategory || (!activeCategory.subcategories)){
+        delete this.product.subcategory;
+        return [];
+      }
+      return activeCategory.subcategories;
+    }
+  },
   created: function () {
     var self = this
+    categoriesCollection.get().then(querySnapshot => {
+      const categories = [];
+      querySnapshot.forEach(doc => {
+        const category = {
+          ...doc.data(),
+          firebaseId: doc.id
+        };
+        self.categories.push(category);
+      });
+    });
+
+
     // Edit mode
     if(this.$route.params.product_id) {
       this.editMode = true

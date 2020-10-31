@@ -74,13 +74,13 @@ export default {
           },
           products: []
         },
-        // {
-        //   category: {
-        //     name: "Latkans",
-        //     link: "/category/latkans"
-        //   },
-        //   products: []
-        // },
+        {
+          category: {
+            name: "Latkans",
+            link: "/category/latkans"
+          },
+          products: []
+        },
         // {
         //   category: {
         //     name: "Quilled Envelopes",
