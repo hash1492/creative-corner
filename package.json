@@ -1,0 +1,62 @@
+{
+  "name": "creative-corner",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "copy-build": "cp -a dist/. public/",
+    "build-local": "npm run build && npm run copy-build"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "bootstrap": "^4.6.2",
+    "bootstrap-vue": "^2.23.1",
+    "firebase": "^10.8.0",
+    "flickity-fade": "^1.0.0",
+    "flickity-imagesloaded": "^2.0.0",
+    "include-media": "^1.4.9",
+    "uuid": "^9.0.1",
+    "vue": "^2.7.16",
+    "vue-carousel": "^0.18.0",
+    "vue-flickity": "^1.1.2",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.6.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@babel/eslint-parser": "^7.23.9",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.21.1",
+    "sass": "^1.71.0",
+    "sass-loader": "^13.3.3",
+    "vue-template-compiler": "^2.7.16"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
